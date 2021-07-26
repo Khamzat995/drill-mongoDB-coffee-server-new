@@ -1,18 +1,36 @@
 const Drink = require("../models/Drink.model");
 
 const getDrinks = async (req, res) => {
-  const data = await Drink.find();
-  res.json(data);
+  try {
+    const data = await Drink.find({}, { name: true, price: true });
+    res.json(data);
+  } catch (e) {
+    res.json({
+      error: `Ошибка при получении всех напитков`,
+    });
+  }
 };
 
 const getAvailability = async (req, res) => {
-  const data = await Drink.find({ availability: true });
-  res.json(data);
+  try {
+    const data = await Drink.find({ availability: true });
+    res.json(data);
+  } catch (e) {
+    res.json({
+      error: `Ошибка при получении напитков в наличии`,
+    });
+  }
 };
 
 const getDrinkById = async (req, res) => {
-  const data = await Drink.findById(req.params.id);
-  res.json(data);
+  try {
+    const data = await Drink.findById(req.params.id);
+    res.json(data);
+  } catch (e) {
+    res.json({
+      error: `Ошибка при поиске напитка с ID: ${req.params.id}`,
+    });
+  }
 };
 
 const postDrink = async (req, res) => {
@@ -28,7 +46,9 @@ const postDrink = async (req, res) => {
     await post.save();
     res.json("Напиток добавлен");
   } catch (e) {
-    console.log(e);
+    res.json({
+      error: "Ошибка при добавлении нового напитка",
+    });
   }
 };
 
@@ -41,7 +61,9 @@ const patchDrink = async (req, res) => {
     await patch.save();
     res.json("Напиток изменён"); // сообщение сервера
   } catch (e) {
-    console.log(e.message);
+    res.json({
+      error: `Ошибка при редактировании напитка с ID: ${req.params.id}`,
+    });
   }
 };
 
@@ -51,7 +73,9 @@ const deleteDrink = async (req, res) => {
     data.delete();
     res.json("Напиток удален");
   } catch (e) {
-    console.log(e.message);
+    res.json({
+      error: "Ошибка при удалении напитка",
+    });
   }
 };
 

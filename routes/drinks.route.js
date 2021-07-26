@@ -10,7 +10,7 @@ const {
 } = require("../controllers/drink.controllers");
 
 router.get("/drinks", getDrinks);
-router.get("/drinks/availability", getAvailability);
+router.get("/drinks/in-stock", getAvailability);
 router.get("/drinks/:id", getDrinkById);
 router.post("/drinks", postDrink);
 router.patch("/drinks/:id", patchDrink);
