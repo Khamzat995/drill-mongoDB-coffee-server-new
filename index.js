@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const boxen = require("boxen");
+
 const app = express();
 
 app.use(express.json());

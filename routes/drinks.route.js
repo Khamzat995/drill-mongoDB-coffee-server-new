@@ -1,19 +1,13 @@
 const { Router } = require("express");
-const router = Router();
-const {
-  getDrinks,
-  getAvailability,
-  getDrinkById,
-  postDrink,
-  patchDrink,
-  deleteDrink,
-} = require("../controllers/drink.controllers");
+const { drinksController } = require ('../controllers/drink.controllers')
 
-router.get("/drinks", getDrinks);
-router.get("/drinks/in-stock", getAvailability);
-router.get("/drinks/:id", getDrinkById);
-router.post("/drinks", postDrink);
-router.patch("/drinks/:id", patchDrink);
-router.delete("/drinks/:id", deleteDrink);
+const router = Router();
+
+router.get("/drinks", drinksController.getDrinks);
+router.get("/drinks/in-stock", drinksController.getAvailability);
+router.get("/drinks/:id", drinksController.getDrinkById);
+router.post("/drinks", drinksController.postDrink);
+router.patch("/drinks/:id", drinksController.patchDrink);
+router.delete("/drinks/:id", drinksController.deleteDrink);
 
 module.exports = router;
